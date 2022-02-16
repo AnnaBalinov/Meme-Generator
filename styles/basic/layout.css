@@ -1,0 +1,22 @@
+.my-canvas {
+  background-color: rgb(255, 255, 255);
+}
+
+.editor-layout {
+  width: auto;
+  height: auto;
+  background-color: rgb(217, 176, 255);
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "canvas control";
+}
+
+.canvas-layout {
+  grid-area: canvas;
+}
+
+.control-layout {
+  grid-area: control;
+}
