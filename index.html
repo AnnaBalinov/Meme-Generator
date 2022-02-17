@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body onload="init()">
+
+    <nav class="Nav-bar-bg Nav-bar-layout">
+        <img class="logo logo-layout" src="img/logos/LOGO.png" alt="memegen-logo">
+        <ul class="ul-layout">
+            <li><a href="#">Gallery</a></li>
+            <li>|</li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-page">
+
+        <section class="gallery grid-gallery">
+            <img id="1" onclick="onSelectedImg(this)" src="img/meme/1.jpg" alt="">
+            <img id="2" onclick="onSelectedImg(this)" src="img/meme/2.jpg" alt="">
+            <img id="3" onclick="onSelectedImg(this)" src="img/meme/3.jpg" alt="">
+            <img id="4" onclick="onSelectedImg(this)" src="img/meme/4.jpg" alt="">
+            <img id="5" onclick="onSelectedImg(this)" src="img/meme/5.jpg" alt="">
+            <img id="6" onclick="onSelectedImg(this)" src="img/meme/6.jpg" alt="">
+            <img id="7" onclick="onSelectedImg(this)" src="img/meme/7.jpg" alt="">
+            <img id="8" onclick="onSelectedImg(this)" src="img/meme/8.jpg" alt="">
+            <img id="9" onclick="onSelectedImg(this)" src="img/meme/9.jpg" alt="">
+            <img id="10" onclick="onSelectedImg(this)" src="img/meme/10.jpg" alt="">
+            <img id="11" onclick="onSelectedImg(this)" src="img/meme/11.jpg" alt="">
+            <img id="12" onclick="onSelectedImg(this)" src="img/meme/12.jpg" alt="">
+            <img id="13" onclick="onSelectedImg(this)" src="img/meme/13.jpg" alt="">
+            <img id="14" onclick="onSelectedImg(this)" src="img/meme/14.jpg" alt="">
+            <img id="15" onclick="onSelectedImg(this)" src="img/meme/15.jpg" alt="">
+            <img id="16" onclick="onSelectedImg(this)" src="img/meme/16.jpg" alt="">
+            <img id="17" onclick="onSelectedImg(this)" src="img/meme/17.jpg" alt="">
+            <img id="18" onclick="onSelectedImg(this)" src="img/meme/18.jpg" alt="">
+        </section>
+
+        <section class="grid-editor">
+            <div class="canvas-container">
+                <canvas id="my-canvas" width="400" height="400"></canvas>
+            </div>
+            <div class="editor-tools">
+                <input class="input-txt" onkeyup="onInputTxt(this.value)" onfocus="this.value=''" id="user-txt"
+                    type="text" placeholder="Enter some text" name="userTxt">
+                <!-- <button onclick="onSaveLineTxt()">SAVE AND DRAG TEXT</button> -->
+                <div class="tools-nav">
+                    <div class="row">
+                        <button class="btn-icon"><img class="icon" src="img/icons/text-stroke.png"
+                                alt="stroke"></button>
+                        <input class="input-color" type="color">
+                        <button class="btn-icon"><img class="icon" src="img/icons/increase-font-icon.png"
+                                alt="increase"></button>
+                        <button class="btn-icon"><img class="icon" src="img/icons/decrease-font-icon.png"
+                                alt="decrease"></button>
+                    </div>
+                    <div class="row">
+                        <button onclick="onSaveLineTxt()" class="btn-icon">
+                            <img class="icon" src="img/icons/up-and-down-opposite-double-arrows-side-by-side.png"
+                                alt="arrows">
+                        </button>
+                        <button class="btn-icon"><img class="icon" src="img/icons/add.png" alt="add"></button>
+                        <button class="btn-icon"><img class="icon" src="img/icons/trash.png" alt="trash"></button>
+                    </div>
+                </div>
+                <button class="btn-share">share</button>
+            </div>
+        </section>
+
+        <!-- <div>
+                    <button onclick="onSwitchLine()">SWITCH LINE</button>
+                    <p>Current line: <span class="cuurent-line">1</span></p>
+                </div>  -->
+
+    </main>
+
+
+
+    <!-- <div class="share-container"></div> -->
+
+    <footer class="main-footer">
+        <div><img class="logo" src="img/logos/Layer-2.png" alt="memegen-logo"> </div>
+        <div>
+            <p>All rights reserved 2022</p>
+        </div>
+    </footer>
+
+    <script src="js/services/meme-service.js"></script>
+    <script src="js/controllers/meme-controller.js"></script>
+
+</body>
+
+</html>

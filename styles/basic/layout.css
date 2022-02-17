@@ -1,22 +1,32 @@
-.my-canvas {
-  background-color: rgb(255, 255, 255);
+.Nav-bar-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.editor-layout {
-  width: auto;
-  height: auto;
-  background-color: rgb(217, 176, 255);
+.logo-layout {
+  margin-left: 25px;
+}
 
+.ul-layout {
+  margin-right: 25px;
+}
+
+.grid-gallery {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "canvas control";
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+  align-items: stretch;
 }
 
-.canvas-layout {
-  grid-area: canvas;
+.grid-gallery img {
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
 }
 
-.control-layout {
-  grid-area: control;
+.grid-editor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* gap: 20px; */
 }
