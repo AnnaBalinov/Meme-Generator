@@ -35,7 +35,7 @@ canvas {
   margin: 10px;
 }
 .btn-icon:hover {
-  background-color: rgb(190, 190, 190);
+  background-color: rgb(160, 160, 160);
 }
 
 .input-txt {
@@ -72,7 +72,7 @@ canvas {
   flex-direction: row;
 }
 
-.btn-share {
+.btn-sd {
   font-family: montserrat, sans-serif;
   color: #ffff;
   font-size: larger;
@@ -82,4 +82,8 @@ canvas {
   border: #fff;
   background-color: #ff7f00;
   margin-top: 40px;
+}
+
+.btn-sd:hover {
+  background-color: #d46a00;
 }

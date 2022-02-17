@@ -10,6 +10,10 @@ function getMeme() {
     return gMeme
 }
 
+function getLine() {
+    return gCurrLine
+}
+
 function setMeme(id, idx) {
     gMeme = _creatMeme(id, idx)
     console.log('meme:', gMeme)
@@ -37,10 +41,6 @@ function saveLineTxt(txt, size, color) {
 
     console.log('idx', idx)
     console.log('gMeme.lines', gMeme.lines)
-}
-
-function getLine() {
-    return gCurrLine
 }
 
 function _createLineTxt(txt, pos = { x: 50, y: 100 }, size = 120, color = 'black', isDrag = false) {
