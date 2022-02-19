@@ -1,11 +1,9 @@
 /* SETUP  */
-/* @import "setup/vars.css"; */
 @import "setup/typography.css";
 
 /* BASE */
 @import "basic/base.css";
 @import "basic/layout.css";
-/* @import 'basic/helpers.css'; */
 @import 'basic/mq.css';
 
 /* COMPONENTS */
@@ -15,8 +13,3 @@
 @import "components/gallery.css";
 @import "components/editor.css"; 
 
-/* @import 'components/content-cards.css'; */
-/* @import 'components/lower-area.css'; */
-/* @import 'components/footer.css'; */
-/* @import 'components/modal.css'; */
-/* @import 'components/screen.css';  */

@@ -141,9 +141,9 @@ function drawText(text, x, y) {
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
-    window.addEventListener('resize', () => {
-        renderMeme()
-    })
+    // window.addEventListener('resize', () => {
+    //     renderMeme()
+    // })
 }
 
 function addMouseListeners() {

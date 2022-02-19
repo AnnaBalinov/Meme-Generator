@@ -1,10 +1,11 @@
 .main-footer {
-  background-color: #ff7f00;
+  background-color: #fd5be2;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 250px;
+  width: auto;
   font-family: montserrat-Thin, sans-serif;
   color: #fff;
 }

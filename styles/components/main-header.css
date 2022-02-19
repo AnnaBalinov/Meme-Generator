@@ -1,7 +1,8 @@
 .Nav-bar-bg {
+  width: auto;
   height: 70px;
   padding: 8.5px 25px 0 24.5px;
-  background-color: #ff7f00;
+  background-color: #fd5be2;
 }
 
 .logo {
@@ -21,4 +22,18 @@
 
 .Nav-bar-bg li{
   padding: 10px;
+}
+
+/* .Nav-bar-bg ul {
+  top: 70px;
+  right: -200px;
+  position: fixed;
+  display: flex;
+  background-color: #ff7f00;
+  min-width: 100px;
+  flex-direction: column;
+} */
+
+body.menu-open .main-nav {
+  transform: translateX(0);
 }

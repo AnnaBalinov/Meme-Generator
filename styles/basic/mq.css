@@ -18,4 +18,31 @@
     grid-template-columns: repeat(1, minmax(180px, 1fr));
     gap: 10px;
   }
+
+  .Nav-bar-bg {
+    width: 300px;
+  }
+
+  .logo-layout {
+    margin-left: 2px;
+  }
+
+  .ul-layout {
+    margin-right: 2px;
+  }
+
+  .main-page {
+    width: auto;
+  }
+
+  canvas {
+    width: 300px;
+    height: 300px;
+  }
+
+  .main-footer {
+    width: 300px;
+  }
 }
+
+

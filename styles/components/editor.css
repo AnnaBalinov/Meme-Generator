@@ -80,10 +80,10 @@ canvas {
   height: 50px;
   border-radius: 6px;
   border: #fff;
-  background-color: #ff7f00;
-  margin-top: 40px;
+  background-color: #fd5be2;
+  margin-top: 20px;
 }
 
 .btn-sd:hover {
-  background-color: #d46a00;
+  background-color: #fd5be2;
 }
