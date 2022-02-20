@@ -1,13 +1,13 @@
 'use strict'
 
 function initGallery() {
-    renderGallery()
+    var imgs = getImgs()
+    renderGallery(imgs)
+
     renderKeywords()
 }
 
-function renderGallery() {
-
-    var imgs = getImgs()
+function renderGallery(imgs) {
     var strHTML = imgs.map((img) => {
         return `
         <img id="${img.id}" onclick="onSelectedImg(this)" 
@@ -18,27 +18,25 @@ function renderGallery() {
     elGallery.innerHTML = strHTML.join('')
 }
 
-function onFilterGallery() {
+function onFilterGallery(filterBy) {
 
     var keywords = getKeywords()
     var imgs = getImgs()
-    var input = document.getElementById('search-Input');
-    var filter = input.value.toLowerCase();
+    filterBy = filterBy.toLowerCase()
 
-    for (var i = 0; i < imgs.length; i++) {
-
-        var img = imgs[i]
-        var txtValue = img.keywords
-        var elCurrImg = document.getElementById(img.id)
-
-        if (txtValue.indexOf(filter) > -1) {
-            elCurrImg.style.display = "";
-        } else {
-            elCurrImg.style.display = "none";
-        }
+    if (!filterBy) {
+        renderGallery(imgs)
+        return
     }
 
-    var keyword = filter
+    imgs = imgs.filter((img) => {
+        var txtValue = img.keywords
+        return txtValue.includes(filterBy)
+    })
+
+    renderGallery(imgs)
+
+    var keyword = filterBy
     var keywordCurrSize = keywords[keyword]
     var newSize = keywordCurrSize + 1
 
@@ -84,5 +82,5 @@ function onKeywordsClick(ev) {
     var input = document.getElementById('search-Input')
     input.value = Keyword
 
-    onFilterGallery()
+    onFilterGallery(Keyword)
 }

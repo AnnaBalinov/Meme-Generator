@@ -7,80 +7,77 @@ function getMeme() {
     return gMeme
 }
 
-function getLine() {
+function getCurrLine() {
     return gCurrLine
 }
 
 function setMeme(id, idx) {
     gMeme = _creatMeme(id, idx)
-    console.log('meme:', gMeme)
+    gCurrLine = gMeme.lines[0]
+}
+
+function txtBorder() {
+    var idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].isBorder = !gMeme.lines[idx].isBorder
+}
+
+function txtSetColor(color) {
+    var idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].color = color
+}
+
+function txtResize(OA) {
+    var idx = gMeme.selectedLineIdx
+    if (OA === 'increase') gMeme.lines[idx].size += 5
+    if (OA === 'decrease') gMeme.lines[idx].size -= 5
+}
+
+function deleteTxt() {
+    gMeme.lines.forEach(line => {
+        line.txt = ' '
+    })
 }
 
 function switchLineIdx() {
     if (gMeme.selectedLineIdx === 2) gMeme.selectedLineIdx = 0
     else gMeme.selectedLineIdx++
-    console.log('Line Idx switch to:', gMeme.selectedLineIdx)
-}
-
-function saveLineTxt(txt, size, color) {
-    if (!gMeme) gMeme = _creatMeme()
-
     var idx = gMeme.selectedLineIdx
-    var pos = { x: 50, y: 100 }
-    if (idx === 0) pos.y = 100;
-    else if (idx === 1) pos.y = 250;
-    else pos.y = 400;
-
-    var line = _createLineTxt(txt, pos, size, color)
-    gMeme.lines.splice(idx, 1, line)
-
-    gCurrLine = line
-
-    console.log('idx', idx)
-    console.log('gMeme.lines', gMeme.lines)
+    gCurrLine = gMeme.lines[idx]
 }
 
-function _createLineTxt(txt, pos = { x: 50, y: 100 }, size = 120, color = 'black', isDrag = false) {
+function saveLineTxt(txt) {
+    var idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].txt = txt
+}
+
+function _createLineTxt
+    (txt, pos = { x: 50, y: 100 },
+        size = 50, color = 'white',
+        isBorder = true, isDrag = false,
+        posSize = 120) {
     return {
         txt,
         pos,
         size,
         color,
-        isDrag
+        isBorder,
+        isDrag,
+        posSize,
     }
 }
 
 function _creatMeme(id = 1, idx = 0) {
-    // console.log('meme created')
-
     return {
         imgId: id,
         selectedLineIdx: idx,
-        lines: []
+        lines: [_createLineTxt(' ', { x: 50, y: 70 }),
+        _createLineTxt(' ', { x: 50, y: 180 }),
+        _createLineTxt(' ', { x: 50, y: 300 })]
     }
-}
-
-
-///////Txt drag service
-function isTxtClicked(clickedPos) {
-    const { pos } = gCurrLine
-    const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
-    return distance <= gCurrLine.size
 }
 
 function setTxtDrag(isDrag) {
     gCurrLine.isDrag = isDrag
 }
-
-function moveTxt(dx, dy) {
-    gCurrLine.pos.x += dx
-    gCurrLine.pos.y += dy
-}
-
-
-
-
-
-
 
 

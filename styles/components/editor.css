@@ -75,13 +75,13 @@ canvas {
 .btn-sd {
   font-family: montserrat, sans-serif;
   color: #ffff;
-  font-size: larger;
-  width: 120px;
-  height: 50px;
+  font-size: 14px;
+  width: 100px;
+  height: 40px;
   border-radius: 6px;
   border: #fff;
   background-color: #fd5be2;
-  margin-top: 20px;
+  margin: 20px 5px 5px 5px;
 }
 
 .btn-sd:hover {

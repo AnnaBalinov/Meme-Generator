@@ -1,7 +1,7 @@
 .Nav-bar-bg {
   width: auto;
   height: 70px;
-  padding: 8.5px 25px 0 24.5px;
+  padding: 25px;
   background-color: #fd5be2;
 }
 
@@ -20,7 +20,7 @@
   text-align: center;
 }
 
-.Nav-bar-bg li{
+.Nav-bar-bg li {
   padding: 10px;
 }
 

@@ -1,22 +1,19 @@
 'use strict'
 
-const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
-const gElMemeEditor = document.querySelector('#meme-editor-page')
-const gElGallery = document.querySelector('#gallery-page')
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
+const gElMemeEditor = document.querySelector('#meme-editor-page');
+const gElGallery = document.querySelector('#gallery-page');
 
 var gElCanvas;
 var gCtx;
 var gStartPos;
-
-var gLastTxtPos;
-var gCurrTxtPos;
 var gIsDraw = false;
+var gIsSaveMode = false;
 
 function init() {
     gElMemeEditor.classList.add('hidden')
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
-
     addListeners()
 }
 
@@ -30,20 +27,27 @@ function renderMeme() {
     var img = new Image()
     img.src = `img/meme/${meme.imgId}.jpg`;
     img.onload = () => {
-        // gCtx.save()
-        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height) //img,x,y,xend,yend
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         renderTxt()
-        // gCtx.restore()
+        renderRect()
     }
 }
 
 function renderTxt() {
-    // gCtx.save()
     var meme = getMeme()
     meme.lines.forEach((line) => {
-        drawText(line.txt, line.pos.x, line.pos.y)
+        drawText(line.txt, line.pos.x, line.pos.y,
+            line.size, line.color, line.isBorder)
     });
-    // gCtx.restore()
+}
+
+function renderRect() {
+    if (gIsSaveMode) return
+    var meme = getMeme()
+    var idx = meme.selectedLineIdx
+    console.log(idx)
+    var pos = meme.lines[idx].pos
+    drawRect(pos.x - 35, pos.y - 60, 320, 70)
 }
 
 function onSelectedImg(ev) {
@@ -55,95 +59,89 @@ function onSelectedImg(ev) {
 }
 
 function onSwitchLine() {
-    onSaveLineTxt()
+    var input = document.querySelector('#user-txt')
+    saveLineTxt(input.value)
     switchLineIdx()
-
-    // renderMeme()
+    renderMeme()
+    clearInputTxt()
 }
 
 function onSaveLineTxt() {
     var input = document.querySelector('#user-txt')
     saveLineTxt(input.value)
-    input.value = ''
-    renderTxt()
-
     switchLineIdx()
+    renderMeme()
+    clearInputTxt()
+}
+
+function clearInputTxt() {
+    var input = document.querySelector('#user-txt')
+    input.value = ''
 }
 
 function onInputTxt(value) {
-    var meme = getMeme()
-    var idx = meme.selectedLineIdx
-    drawTextByIdx(idx, value)
-    console.log('you draw in line:', meme.selectedLineIdx)
-}
-
-function drawTextByIdx(idx, txt) {
-    switch (idx) {
-        case 0:
-            drawText(txt, 50, 100)
-            break;
-        case 1:
-            drawText(txt, 50, 250)
-            break;
-        case 2:
-            drawText(txt, 50, 400)
-            break;
-    }
-}
-
-////txt-editor
-var gTxtColor = 'white'
-var gTxtBorder = false
-var gTxtSize = 50
-function onTxtBorder() {
-    gTxtBorder = !gTxtBorder
-}
-
-function onTxtColor(color) {
-    console.log(color)
-    gTxtColor = color
-}
-
-function onTxtIncrease() {
-    console.log('Txt++')
-    gTxtSize += 5
-    renderTxt()
-}
-
-function onTxtDecrease() {
-    console.log('Txt--')
-    gTxtSize -= 5
-    renderTxt()
-}
-
-function onDeleteTxt() {
-    var meme = getMeme()
-    meme.lines = []
+    saveLineTxt(value)
+    gIsSaveMode = false
     renderMeme()
 }
 
-function onDownloadMeme(elLink) {
-    const data = gElCanvas.toDataURL()
-    elLink.href = data
+function onTxtBorder() {
+    txtBorder()
+    renderMeme()
 }
 
-function drawText(text, x, y) {
-    gCtx.lineWidth = 2;
-    gCtx.strokeStyle = 'black';
-    gCtx.fillStyle = gTxtColor;
-    gCtx.font = `${gTxtSize}px IMPACT`;
+function onTxtColor(color) {
+    txtSetColor(color)
+    renderMeme()
+}
+
+function onTxtResize(OA) {
+    txtResize(OA)
+    renderMeme()
+}
+
+function onDeleteTxt() {
+    deleteTxt()
+    renderMeme()
+}
+
+function onSaveMeme() {
+    gIsSaveMode = true
+    console.log('be:', gIsSaveMode)
+    renderMeme()
+
+    onDownloadMeme()
+}
+
+function onDownloadMeme() {
+    gIsSaveMode = true
+    renderMeme()
+    var elLink = document.getElementById('link')
+    var data = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = data
+    console.log('Af:', gIsSaveMode)
+}
+
+function drawText(text, x, y, size, color, border) {
+    gCtx.lineWidth = 2
+    gCtx.strokeStyle = 'black'
+    gCtx.fillStyle = color;
+    gCtx.font = `${size}px IMPACT`
     gCtx.fillText(text, x, y);
-    if (gTxtBorder) gCtx.strokeText(text, x, y, [, 0])
+    if (!border) gCtx.strokeText(text, x, y, [, 0])
     else gCtx.strokeText(text, x, y)
-    // gCtx.strokeText(text, x, y); ///strokeText(text, x, y [, maxWidth])
+}
+
+function drawRect(x, y, width, height) {
+    gCtx.beginPath();
+    gCtx.rect(x, y, width, height)
+    gCtx.strokeStyle = 'white'
+    gCtx.stroke()
 }
 
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
-    // window.addEventListener('resize', () => {
-    //     renderMeme()
-    // })
 }
 
 function addMouseListeners() {
@@ -169,7 +167,7 @@ function onDown(ev) {
 
 function onMove(ev) {
     // console.log('onMove()');
-    const line = getLine();
+    const line = getCurrLine();
     if (line.isDrag) {
         const pos = getEvPos(ev)
         const dx = pos.x - gStartPos.x
@@ -200,4 +198,17 @@ function getEvPos(ev) {
         }
     }
     return pos
+}
+
+function isTxtClicked(clickedPos) {
+    var currLine = getCurrLine()
+    const { pos } = currLine
+    const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
+    return distance <= currLine.posSize
+}
+
+function moveTxt(dx, dy) {
+    var currLine = getCurrLine()
+    currLine.pos.x += dx
+    currLine.pos.y += dy
 }
